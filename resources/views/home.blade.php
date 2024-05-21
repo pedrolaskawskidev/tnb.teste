@@ -37,9 +37,11 @@
     @yield('employee.show')
     
     @yield('departament.index')
+    @yield('departament.show')
 
     @yield('task.index')
     @yield('task.show')
+    @stack('js')
     </div>
 </body>
 

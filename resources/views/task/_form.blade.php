@@ -61,3 +61,30 @@
         </div>
     </div>
 </form>
+
+@push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var form = document.getElementById('formTask');
+            var start = document.getElementById('start');
+            var end = document.getElementById('end');
+
+            form.addEventListener('submit', function(event) {
+                
+                var startHour = parseInt(start.options[start.selectedIndex].value.split(':')[0]);
+                var endHour = parseInt(end.options[end.selectedIndex].value.split(':')[0]);
+                var hoursArray = [];
+
+                for (count = startHour; count <= endHour; count++) {
+                    hoursArray.push(count);
+                }
+
+                if ((hoursArray.includes(12) && endHour != 12 )||(hoursArray.includes(13) && startHour != 13)) {
+                    alert('Hora da tarefa inclui horário do intervalo, selecionar um horário que não abrange das 12:00 às 13:00');
+                    event.preventDefault();
+                }
+                
+            });
+        });
+    </script>
+@endpush

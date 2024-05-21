@@ -3,6 +3,7 @@
 use App\Http\Controllers\DepartamentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TasksController;
+use App\Models\Departament;
 use App\Models\Task;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,8 @@ Route::get('employee/{id}/destroy', [EmployeeController::class, 'destroy'])->nam
 
 
 Route::get('departament', [DepartamentController::class, 'index'])->name('departament.index');
+Route::get('departament/new', [DepartamentController::class, 'create'])->name('departament.create');
+Route::post('departament/store', [DepartamentController::class, 'store'])->name('departament.store');
+Route::get('departament/{id}/edit', [DepartamentController::class, 'edit'])->name('departament.edit');
+Route::put('departament/{id}/update', [DepartamentController::class, 'update'])->name('departament.update');
+Route::get('departament/{id}/destroy', [DepartamentController::class, 'destroy'])->name('departament.destroy');

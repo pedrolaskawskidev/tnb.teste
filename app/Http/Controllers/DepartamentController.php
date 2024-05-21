@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 
 class DepartamentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $departaments = Departament::all();
@@ -18,51 +16,45 @@ class DepartamentController extends Controller
        return view('departament.index',['departaments' => $departaments]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+   
     public function create()
     {
-        //
+        return view('departament.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+  
     public function store(Request $request)
     {
-        //
-    }
+        $data = $request->all();
+        Departament::create($data);
+        return redirect()->route('departament.index');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(string $id)
     {
-        //
+        $departament =  Departament::findOrFail($id);
+        return view('departament.edit', ['departament' => $departament]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->except('_token', '_method');
+        
+       $departament = Departament::findOrFail($data['id']);
+       $departament->update($data);
+
+        return redirect()->route('departament.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+   
     public function destroy(string $id)
     {
-        //
+        $departament = Departament::find($id);
+        $departament->delete();
+
+        return redirect()->route('departament.index');
+
     }
 }
